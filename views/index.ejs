@@ -3,9 +3,42 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        #map {
+          height: 500px;
+        }
+    </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div>
+      <div>
+        <nav class="navbar navbar-inverse" role="navigation" >
+           <ul class="nav navbar-nav">
+             <li class="active"><a class="navbar-brand" href="/">E16</a></li>
+             <li><a href="/map">Locations</a></li>
+             <li><a href="/count">Counts</a></li>
+          </ul>
+        </nav>
+      </div>
+      <br/>
+      <div class="container" align="cener">
+          <div align="center">
+            <h1 >"The next platform will be the grid."</h1>
+            <div align="right" style="margin-right: 300px">
+              -James Poole
+              <br />
+              (Yes I just quoted myself)
+            </div>
+        </div>
+      </div>
+
+
+
+    </div>
   </body>
 </html>

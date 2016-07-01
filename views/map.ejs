@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        #map {
+          height: 500px;
+        }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>
+        <nav class="navbar navbar-inverse" role="navigation" >
+            <a class="navbar-brand" href="/">E16</a>
+             <ul class="nav navbar-nav">
+               <li class="active"><a href="/map">Locations</a></li>
+               <li><a href="/count">Counts</a></li>
+            </ul>
+        </nav>
+      </div>
+      <br/>
+
+      <div class="container">
+
+        <h1>Ping21 Locations</h1>
+        <p>On a daily basis the system uses 10 random "21 Computers" to ping this domain.  This is a visual representation of the location of all nodes discovered so far .</p>
+        <div id="map"></div>
+        <script>
+          var map, heatmap;
+          function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: 37.7749, lng: -122.4194},
+              zoom: 9
+            });
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+              data: getPoints(),
+              map: map
+            });
+          }
+
+          function getPoints() {
+            var points  = [];
+
+            <% for (var i = 0; i < navPoints.length; i++) { %>
+                points.push( new google.maps.LatLng(<%= navPoints[i].lat %>, <%= navPoints[i].long %>));
+            <% } %>
+
+            return points;
+          }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&libraries=visualization&callback=initMap" async defer></script>
+      </div>
+    </div>
+  </body>
+</html>

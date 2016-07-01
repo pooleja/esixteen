@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        #map {
+          height: 500px;
+        }
+    </style>
+  </head>
+  <body>
+    <div>
+    <div>
+      <nav class="navbar navbar-inverse" role="navigation" >
+          <a class="navbar-brand" href="/">E16</a>
+           <ul class="nav navbar-nav">
+             <li><a href="/map">Locations</a></li>
+             <li class="active"><a href="/count">Counts</a></li>
+          </ul>
+      </nav>
+    </div>
+    <br/>
+
+
+    <h1>Total Unique Nodes Found</h1>
+    <p>On a daily basis the system uses 10 random "21 Computers" to ping this domain.  This is an approximation of how many 21 computers might be running out there.</p>
+    <p>When the curve flattens out, it will indicate that the number of new nodes being found is slowing, and the approximate count is approaching the actual count.</p>
+
+    <div align="center">
+      <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+
+    <script>
+      var ctx = document.getElementById("myChart");
+      Chart.defaults.global.legend.display = false;
+      var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels:  [<%= data %>],
+              datasets: [{
+                  data: [<%= data %>],
+                  borderWidth: 1
+              }]
+          },
+          options:
+          {
+              scales:
+              {
+                  xAxes: [{
+                      display: false
+                  }],
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      });
+      </script>
+
+      </div>
+  </body>
+</html>
