@@ -1,3 +1,6 @@
+
+require('dotenv').config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,7 +14,7 @@ var app = express();
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/poolecom');
+mongoose.connect(process.env.MONGODB_URI);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
