@@ -1,30 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-        #map {
-          height: 500px;
-        }
-    </style>
-  </head>
+  <% include ./partials/head %>
   <body>
     <div>
-      <div>
-        <nav class="navbar navbar-inverse" role="navigation" >
-            <a class="navbar-brand" href="/">E16</a>
-             <ul class="nav navbar-nav">
-               <li class="active"><a href="/map">Locations</a></li>
-               <li><a href="/count">Counts</a></li>
-            </ul>
-        </nav>
-      </div>
+      <% include ./partials/nav %>
       <br/>
 
       <div class="container">

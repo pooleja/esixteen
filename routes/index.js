@@ -12,9 +12,17 @@ var Env = require('../config/env.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  res.render('index', { title: 'E16'});
+  res.render('index', { title: ''});
 
 });
+
+router.get('/apps/sensore16', function(req, res, next) {
+
+  res.render('apps/sensore16', { title: 'Apps'});
+
+});
+
+
 
 /* GET map page. */
 router.get('/map', function(req, res, next) {
@@ -31,7 +39,7 @@ router.get('/map', function(req, res, next) {
      serverList.push(latlong);
    }
 
-   res.render('map', { title: 'E16 - Locations', key: Env.MAP_API_KEY, navPoints: serverList });
+   res.render('map', { title: 'Locations', key: Env.MAP_API_KEY, navPoints: serverList });
 
  });
 });
@@ -47,7 +55,7 @@ router.get('/count', function(req, res, next) {
      data.push(stats[i].count);
    }
 
-   res.render('counts', { title: 'E16 - Counts', data: data });
+   res.render('counts', { title: 'Counts', data: data });
 
  });
 });

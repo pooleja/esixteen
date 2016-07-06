@@ -1,0 +1,31 @@
+<%
+var homeClass = "";
+var mapClass = "";
+var countClass = "";
+var appsClass = "dropdown";
+
+if(title == ""){
+  homeClass = "active";
+} else if (title == "Locations"){
+  mapClass = "active";
+} else if (title == "Counts"){
+  countClass = "active";
+} else if (title == "Apps"){
+  appsClass += " active";
+}
+
+%>
+
+<nav class="navbar navbar-inverse" role="navigation" >
+   <ul class="nav navbar-nav">
+     <li class="<%= homeClass %>"><a class="navbar-brand" href="/">E16</a></li>
+     <li class="<%= mapClass %>"><a href="/map">Locations</a></li>
+     <li class="<%= countClass %>"><a href="/count">Counts</a></li>
+     <li class="<%= appsClass %>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Apps <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/apps/sensore16">SensorE16</a></li>
+          </ul>
+        </li>
+  </ul>
+</nav>
