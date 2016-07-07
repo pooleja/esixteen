@@ -132,7 +132,8 @@ router.post('/upload', function(req, res){
 
 router.post('/stat', function(req, res){
 
-  //console.log(JSON.stringify(req.headers));
+  console.log(JSON.stringify(req.headers) + "\n\n");
+  console.log(JSON.stringify(req.body));
 
   if(req.headers.client != Env.SECRET){
     console.log("Failed client header check");
@@ -140,52 +141,58 @@ router.post('/stat', function(req, res){
   }
 
   // Ensure there is a server object saved for this post
-  Server.findOne({ip : req.body.server.ip}, function(error, foundServer){
+  if(req.body.isUp){
+    Server.findOne({ip : req.body.server.ip}, function(error, foundServer){
 
-    if(error){
-      console.log(error);
-      return res.json({success: false, error: error});
-    }
+      if(error){
+        console.log(error);
+        return res.json({success: false, error: error});
+      }
 
-    console.log(JSON.stringify("req.body.server: " + JSON.stringify(req.body.server)));
-    console.log(JSON.stringify("foundServer: " + JSON.stringify(foundServer)));
+      console.log(JSON.stringify("req.body.server: " + JSON.stringify(req.body.server)));
+      console.log(JSON.stringify("foundServer: " + JSON.stringify(foundServer)));
 
-    if(!foundServer){
+      if(!foundServer){
 
-      Server(req.body.server).save(function(error){
-        if(error){
-          console.log(error);
-          return res.json({success: false, error: error});
-        }
+        Server(req.body.server).save(function(error){
+          if(error){
+            console.log(error);
+            return res.json({success: false, error: error});
+          }
 
-      });
-    } else {
+        });
+      } else {
 
-      foundServer.region = req.body.server.region;
-      foundServer.city = req.body.server.city;
-      foundServer.country = req.body.server.country;
-      foundServer.org = req.body.server.org;
-      foundServer.hostname = req.body.server.hostname;
-      foundServer.loc = req.body.server.loc;
+        foundServer.region = req.body.server.region;
+        foundServer.city = req.body.server.city;
+        foundServer.country = req.body.server.country;
+        foundServer.org = req.body.server.org;
+        foundServer.hostname = req.body.server.hostname;
+        foundServer.loc = req.body.server.loc;
 
-      foundServer.save(function(error){
-        if(error){
-          console.log(error);
-          return res.json({success: false, error: error});
-        }
+        foundServer.save(function(error){
+          if(error){
+            console.log(error);
+            return res.json({success: false, error: error});
+          }
 
-      });
-    }
-  });
+        });
+      }
+    });
+  }
+
+  // Set the server IP for the stats object
+  if(req.body.isUp){
+    req.body.serverIp = req.body.server.ip;
+  }
 
   // Save the server stat info too
-  req.body.serverIp = req.body.server.ip;
   ServerStat(req.body).save(function(error){
 
     if(error){
       console.log(error);
       return res.json({success: false, error: error});
-    }     
+    }
 
     return res.json ({success: true});
   });
