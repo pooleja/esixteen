@@ -132,8 +132,8 @@ router.post('/upload', function(req, res){
 
 router.post('/stat', function(req, res){
 
-  console.log(JSON.stringify(req.headers) + "\n\n");
-  console.log(JSON.stringify(req.body));
+  //console.log(JSON.stringify(req.headers) + "\n\n");
+  //console.log(JSON.stringify(req.body));
 
   if(req.headers.client != Env.SECRET){
     console.log("Failed client header check");
@@ -149,8 +149,8 @@ router.post('/stat', function(req, res){
         return res.json({success: false, error: error});
       }
 
-      console.log(JSON.stringify("req.body.server: " + JSON.stringify(req.body.server)));
-      console.log(JSON.stringify("foundServer: " + JSON.stringify(foundServer)));
+      //console.log(JSON.stringify("req.body.server: " + JSON.stringify(req.body.server)));
+      //console.log(JSON.stringify("foundServer: " + JSON.stringify(foundServer)));
 
       if(!foundServer){
 
