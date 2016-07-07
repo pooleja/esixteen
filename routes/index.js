@@ -23,6 +23,12 @@ router.get('/apps/sensore16', function(req, res, next) {
 
 });
 
+router.get('/apps/statse16', function(req, res, next) {
+
+  res.render('apps/statse16', { title: 'Apps'});
+
+});
+
 
 
 /* GET map page. */
