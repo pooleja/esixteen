@@ -7,7 +7,7 @@ var serverSchema = mongoose.Schema({
   country: String,
   org: String,
   hostname: String,
-  loc: String,
+  loc: String,  
 });
 
 module.exports = mongoose.model('Server', serverSchema);
