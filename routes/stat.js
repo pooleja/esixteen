@@ -223,7 +223,7 @@ router.get('/cpu-capacity', function(req, res, next) {
 
   Server.aggregate([
     {
-      $match: {'latestStat.isUp': {$exists: true}}
+      $match: {'latestStat.cpu_count': {$exists: true}}
     },
     {
       $group: {
@@ -249,7 +249,7 @@ router.get('/cpu-utilization', function(req, res, next) {
 
   Server.aggregate([
     {
-      $match: {'latestStat.isUp': {$exists: true}}
+      $match: {'latestStat.cpu_used_percent': {$exists: true}}
     },
     {
       $group: {
@@ -275,7 +275,7 @@ router.get('/memory-capacity', function(req, res, next) {
 
   Server.aggregate([
     {
-      $match: {'latestStat.isUp': {$exists: true}}
+      $match: {'latestStat.memory_total': {$exists: true}}
     },
     {
       $group: {
@@ -301,7 +301,7 @@ router.get('/memory-utilization', function(req, res, next) {
 
   Server.aggregate([
     {
-      $match: {'latestStat.isUp': {$exists: true}}
+      $match: {'latestStat.memory_used_percent': {$exists: true}}
     },
     {
       $group: {
@@ -327,7 +327,7 @@ router.get('/disk-capacity', function(req, res, next) {
 
   Server.aggregate([
     {
-      $match: {'latestStat.isUp': {$exists: true}}
+      $match: {'latestStat.disk_total': {$exists: true}}
     },
     {
       $group: {
@@ -353,7 +353,7 @@ router.get('/disk-utilization', function(req, res, next) {
 
   Server.aggregate([
     {
-      $match: {'latestStat.isUp': {$exists: true}}
+      $match: {'latestStat.disk_used_percent': {$exists: true}}
     },
     {
       $group: {
