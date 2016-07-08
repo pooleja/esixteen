@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <% include ./partials/head %>
+  <body>
+    <div>
+
+      <% include ./partials/nav %>
+
+      <br/>
+      <div class="container" >
+
+        <h1 id="current-uptime-header">Current Uptime</h1>
+        <p>This is the percentage of nodes currently responding to requests that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1 id="historical-uptime-header">Historical Uptime</h1>
+        <p>This is the all time percentage of nodes responding to requests that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1 id="cpu-capacity-header">CPU Capacity</h1>
+        <p>This is a count of all CPU Cores on nodes that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1 id="cpu-utilization-header">CPU Utilization</h1>
+        <p>This is an average CPU usage percentage on nodes that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1 id="memory-capacity-header">Memory Capacity</h1>
+        <p>This is a count of RAM on nodes that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1 id="memory-utilization-header">Memory Utilization</h1>
+        <p>This is an average RAM usage percentage on nodes that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1 id="disk-capacity-header">Disk Capacity</h1>
+        <p>This is a count of disk space on nodes that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1 id="disk-utilization-header">Disk Utilization</h1>
+        <p>This is an average Disk usage percentage on nodes that E16 knows about who are running the StatsE16 App.</p>
+
+        <h1>Operating Systems</h1>
+        <p>This is a list of all operating systems that E16 knows about.</p>
+        <div id="canvas-container">
+          <canvas id="osChart" ></canvas>
+        </div>
+
+      </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+    <script src="/js/stat.js"></script>
+  </body>
+</html>
