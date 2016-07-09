@@ -60,7 +60,7 @@ $( document ).ready(function() {
 
   $.ajax({url: "/stat/cpu-utilization", success: function(ret){
     if(ret.success){
-      $("#cpu-utilization-header").text($("#cpu-utilization-header").text() + ": " + ret.result.utilization + "%" );
+      $("#cpu-utilization-header").text($("#cpu-utilization-header").text() + ": " + (ret.result.utilization).toFixed(2) + "%" );
     }
   }});
 
@@ -72,7 +72,7 @@ $( document ).ready(function() {
 
   $.ajax({url: "/stat/memory-utilization", success: function(ret){
     if(ret.success){
-      $("#memory-utilization-header").text($("#memory-utilization-header").text() + ": " + ret.result.utilization + "%" );
+      $("#memory-utilization-header").text($("#memory-utilization-header").text() + ": " + (ret.result.utilization).toFixed(2) + "%" );
     }
   }});
 
@@ -84,7 +84,7 @@ $( document ).ready(function() {
 
   $.ajax({url: "/stat/disk-utilization", success: function(ret){
     if(ret.success){
-      $("#disk-utilization-header").text($("#disk-utilization-header").text() + ": " + ret.result.utilization + "%" );
+      $("#disk-utilization-header").text($("#disk-utilization-header").text() + ": " + (ret.result.utilization).toFixed(2) + "%" );
     }
   }});
 
