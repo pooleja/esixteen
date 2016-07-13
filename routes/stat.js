@@ -22,10 +22,13 @@ router.get('/map', function(req, res, next) {
 
    for (var i = 0; i < servers.length; i++) {
      var loc = servers[i].loc;
-     var latlong = {};
-     latlong['lat'] = loc.split(',')[0];
-     latlong['long'] = loc.split(',')[1];
-     serverList.push(latlong);
+
+     if(loc && loc != ""){
+       var latlong = {};
+       latlong['lat'] = loc.split(',')[0];
+       latlong['long'] = loc.split(',')[1];
+       serverList.push(latlong);
+     }
    }
 
    res.render('map', { title: 'Stats', key: Env.MAP_API_KEY, navPoints: serverList });
