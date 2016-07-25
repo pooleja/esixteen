@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <% include ./partials/head %>
+  <body>
+    <div>
+
+      <% include ./partials/nav %>
+
+      <div class="container" style="margin-bottom:100px">
+
+        <% if (typeof success != 'undefined' && success && success != "") { %>
+          <div class="alert alert-success">
+            <strong>Success!</strong> <%= success %>
+          </div>
+        <% } %>
+
+        <% if (typeof error != 'undefined' && error && error != "") { %>
+          <div class="alert alert-danger">
+            <strong>Error!</strong> <%= error %>
+          </div>
+        <% } %>
+
+        <h1>Register your 21 node with eSixteen</h1>
+
+        <p>
+          By registering your node with eSixteen, it will be included in a list of nodes that are paid to run eSixteen services.
+          On a regular basis eSixteen will try to connect to your node and discover the services available and run them if they exist.
+          Each time eSixteen asks your node to run a service, it will send bitcoin directly to you.
+        </p>
+
+        <p>
+          Also, you should sign up for the mailing list on the <a href="/" target="_blank">home page</a> so you can be notified
+          whenever new eSixteen services become available.
+        </p>
+        <br />
+        <h2>Node Details</h2>
+        <form style="width: 500px;" action="/register" method="post">
+          <fieldset class="form-group">
+            <label for="inputIp">21 ZeroTier IP Address:</label>
+            <input type="text" class="form-control" id="inputIp" name="inputIp" placeholder="10.244.XXX.XXX">
+          </fieldset>
+          <fieldset class="form-group">
+            <label>Verify you not a Future Robot Overlord:</label>
+            <div class="g-recaptcha" data-sitekey="<%= RECAPTCHA_SITE_KEY %>"></div>
+          </fieldset>
+
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <br />
+        <br />
+
+        <h4>How to get the ZeroTier IP:</h4>
+        <p>
+          To join the market:
+        </p>
+        <code>
+        $ 21 market join
+        </code>
+        <br />
+        <br />
+        <p>
+        To get your ZeroTier IP:
+        </p>
+        <code>
+        $ 21 market status
+        </code>
+        <br />
+        <br />
+        <p>
+        You will see an output that looks similar to this:
+        </p>
+        <code>
+        Network Name    Your IP<br />
+        --------------  --------------<br />
+        21market        10.244.119.122
+        </code>
+        <br />
+        <br />
+        <p>
+        The IP address will have the form 10.244.XXX.XXX. In this example, the IP address is "10.244.119.122".
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
