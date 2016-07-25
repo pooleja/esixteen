@@ -15,6 +15,19 @@ var speedRoutes = require('./routes/speed');
 
 var app = express();
 
+// SSL Redirect function
+var forceSsl = function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  return next();
+};
+
+// Configure app to use SSL Redirect if it is in prod
+if (Env.NODE_ENV === 'production') {
+  app.use(forceSsl);
+}
+
 
 var mongoose = require('mongoose');
 mongoose.connect(Env.MONGODB_URI);
