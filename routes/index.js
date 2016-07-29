@@ -39,6 +39,12 @@ router.get('/apps/transcodee16', function(req, res, next) {
 
 });
 
+router.get('/learn', function(req, res, next) {
+
+  res.render('learn', { title: 'Learn'});
+
+});
+
 function showRegisterPage(res, errorMessage, successMessage){
   res.render('register', { title: 'Register', RECAPTCHA_SITE_KEY: Env.RECAPTCHA_SITE_KEY, error: errorMessage, success: successMessage});
 }

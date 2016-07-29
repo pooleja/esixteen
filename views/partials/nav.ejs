@@ -2,6 +2,7 @@
 var statsClass = "dropdown";
 var appsClass = "dropdown";
 var registerClass = "";
+var learnClass = "";
 
 if (title == "Stats"){
   statsClass += " active";
@@ -9,6 +10,8 @@ if (title == "Stats"){
   appsClass += " active";
 } else if (title == "Register"){
   registerClass = "active";
+} else if (title == "Learn"){
+  learnClass = "active";
 }
 
 %>
@@ -44,6 +47,7 @@ if (title == "Stats"){
               <li><a href="/stat/count">Counts</a></li>
             </ul>
          </li>
+         <li class="<%= learnClass %>"><a href="/learn">Learn</a></li>
        </ul>
        <ul class="nav navbar-nav navbar-right">
             <li class="<%= registerClass %>"><a href="/register">Register your 21 Node</a></li>
