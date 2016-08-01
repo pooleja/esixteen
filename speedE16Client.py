@@ -1,27 +1,31 @@
 #!/usr/bin/python3
-
 import logging
 import yaml
+import os
+import random
+import string
 from speedE16 import SpeedE16
+
 
 from two1.commands.util import config
 from two1.wallet import Wallet
 from two1.bitrequests import BitTransferRequests
-from two1.bitrequests import BitRequestsError
 requests = BitTransferRequests(Wallet(), config.Config().username)
+
 
 logger = logging.getLogger(__name__)
 
 
 def verifySpeedE16Running(host):
-    """ Verifies that the server is running the flask server on port 8016"""
-
+    """
+    Verifies that the server is running the flask server on port 8016.
+    """
     try:
         serverUrl = "http://" + host + ":8016"
         serverData = requests.get(serverUrl).text
         parsed = yaml.load(serverData)
 
-        if parsed['info']['title'] == 'SpeedE16'
+        if parsed['info']['title'] == 'SpeedE16':
             return True
 
     except Exception as err:
@@ -29,20 +33,24 @@ def verifySpeedE16Running(host):
 
     return False
 
+
 def uploadSpeedTest(website, client, server, speed):
+    """
+    Post result data to server.
+    """
     try:
         data = {
-            'client' : client,
-            'server' : server,
-            'speedMbps' : speed
+            'client': client,
+            'server': server,
+            'speedMbps': speed
         }
 
-        postHeaders = {"client" : "asdfasdf"}
+        postHeaders = {"client": "asdfasdf"}
         ret = requests.post(website + "/speed", json=data, headers=postHeaders)
 
-        if ret.json()['success'] == True:
+        if ret.json()['success'] is True:
             logger.info("Successfully saved speed test")
-        else
+        else:
             logger.warn("Failed to upload speed test")
 
     except Exception as err:
@@ -50,7 +58,9 @@ def uploadSpeedTest(website, client, server, speed):
 
 
 def runSpeedTest(website, client, server):
-
+    """
+    Run the test between client and server.
+    """
     try:
 
         # Figure out the base paths
@@ -77,13 +87,13 @@ def runSpeedTest(website, client, server):
         logger.info("Deleted the temp uploaded file: " + fullFilePath)
 
         # If the upload succeeded, now test download
-        if uploadData['success'] == True:
+        if uploadData['success'] is True:
 
             logger.info("Upload shows success")
 
             downloadData = clientSpeed.remote(requests, uploadData['upload_filename'], server)
 
-            if downloadData['success'] == True:
+            if downloadData['success'] is True:
 
                 logger.info("Remote request shows success")
 
@@ -115,27 +125,28 @@ def runSpeedTest(website, client, server):
         logger.error("Failure: {0}".format(err))
 
 
-
 def getSpeeds(website):
-
+    """
+    Main entry point for starting speed tests.
+    """
     ipData = requests.get(website + "/speed/ips").json()
 
     # Verify if we got a success response from the server
-    if ipData['success'] == True :
+    if ipData['success'] is True:
         ips = ipData['result']
 
         # Iterate over the IPs
         for clientIp in ips:
 
             # Verify the client IP has SpeedE16 up and Running
-            if verifySpeedE16Running(clientIp) == False:
+            if verifySpeedE16Running(clientIp) is False:
                 logger.warning("SpeedE16 could not be confirmed on server {0}.  Continuing to next IP.".format(clientIp))
-                continue;
+                continue
 
             # get a list of all speed tests performed by the IP we are looking at
             speedTests = requests.get(website + "/speed/tests?client=" + clientIp).json()
 
-            if speedTests['success'] == True:
+            if speedTests['success'] is True:
 
                 # Perform a second pass over the IPs and see if there is already a speed test for each combo
                 for serverIp in ips:
@@ -152,22 +163,22 @@ def getSpeeds(website):
                             break
 
                     # If we alread have a speed test for this combo then continue on
-                    if foundMatch == True:
+                    if foundMatch is True:
                         continue
 
                     # Verify if the serverIp is up and running SpeedE16
-                    if verifySpeedE16Running(serverIp) == False:
+                    if verifySpeedE16Running(serverIp) is False:
                         logger.warning("SpeedE16 could not be confirmed on server {0}.  Continuing to next IP.".format(serverIp))
-                        continue;
+                        continue
 
                     runSpeedTest(website, clientIp, serverIp)
 
-            else
+            else:
                 logger.warning("Failed to get speed tests from server for IP: {}".format(clientIp))
                 continue
 
-    else
-        logger.warning("Failed to get IPs from server: {}".format(err))
+    else:
+        logger.warning("Failed to get IPs from server: {}".format(ipData['message']))
 
 
 if __name__ == '__main__':
@@ -177,11 +188,13 @@ if __name__ == '__main__':
     @click.option("-w", "--website", default="http://www.esixteen.co", help="Website to download IPs and upload results to.")
     @click.option("-l", "--log", default="INFO", help="Logging level to use (DEBUG, INFO, WARNING, ERROR, CRITICAL)")
     def run(website, log):
-
+        """
+        Run the app.
+        """
         # Set logging level
         numeric_level = getattr(logger, log.upper(), None)
         if not isinstance(numeric_level, int):
-            raise ValueError('Invalid log level: %s' % loglevel)
+            raise ValueError('Invalid log level: %s' % log)
         logger.basicConfig(level=numeric_level)
 
         # Run
