@@ -45,6 +45,12 @@ router.get('/apps/aliensearche16', function(req, res, next) {
 
 });
 
+router.get('/apps/speede16', function(req, res, next) {
+
+  res.render('apps/speede16', { title: 'Services'});
+
+});
+
 
 router.get('/learn', function(req, res, next) {
 
