@@ -21,6 +21,12 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/apps/adcentse16', function(req, res, next) {
+
+  res.render('apps/adcentse16', { title: 'Services'});
+
+});
+
 router.get('/apps/sensore16', function(req, res, next) {
 
   res.render('apps/sensore16', { title: 'Services'});
