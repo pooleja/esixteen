@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Env = require('../config/env.js');
 
 var Server = require('../model/server.js');
 var SpeedTest = require('../model/speedTest.js');

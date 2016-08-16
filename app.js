@@ -12,6 +12,7 @@ var Env = require('./config/env.js');
 var routes = require('./routes/index');
 var statRoutes = require('./routes/stat');
 var speedRoutes = require('./routes/speed');
+var adRoutes = require('./routes/ad');
 
 var app = express();
 
@@ -47,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/stat', statRoutes);
 app.use('/speed', speedRoutes);
-
+app.use('/ad', adRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

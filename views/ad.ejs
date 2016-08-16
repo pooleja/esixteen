@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>eSixteen.co Ad</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+    html,
+    body {
+      height: 100%;
+      padding: 10px;
+    }
+
+    .outer {
+      position: relative;
+      height: 100%;
+    }
+
+    .inner {
+      position: absolute;
+    }
+
+    .inner a:link, .inner a:visited, .inner a:hover, .inner a:active {
+      text-decoration: none; color: #333;
+    }
+
+
+    .ads{
+      text-align: right;
+    }
+
+  </style>
+</head>
+  <body>
+
+
+      <div class="outer">
+        <div class="media inner">
+          <div class="media-left" style="width: 100px">
+            <a href="<%= ad.targetUrl %>" target="_blank">
+              <img class="pull-left img-responsive" src="<%= ad.imageUrl %>">
+            </a>
+          </div>
+          <div class="media-body">
+            <a href="<%= ad.targetUrl %>" target="_blank">
+              <h4 class="media-heading"><%= ad.title %></h4>
+              <%= ad.description %>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="ads">
+        <small><a href="https://www.esixteen.co" target="_blank">Ads by eSixteen.co</a></small>
+      </div>
+  </body>
+</html>
