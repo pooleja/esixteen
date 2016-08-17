@@ -33,6 +33,8 @@ router.get('/:adId', function(req, res) {
   var d = new Date();
   d.setHours(0,0,0,0);
 
+  print(d);
+
   Ad.findOne({siteKey : key, createdDate: {"$lt" : d}}, null, {sort: {createdDate: -1}}, function(error, foundAd){
 
     if(error || !foundAd){
