@@ -29,9 +29,9 @@ router.post('/', function(req, res, next) {
 router.get('/:adId', function(req, res) {
   key = req.params.adId;
 
-  // Get midnight date
+  // Get midnight date - set to hour = 4 due to UTC time from EST
   var d = new Date();
-  d.setHours(0,0,0,0);
+  d.setHours(4,0,0,0);
 
   console.log(d);
 
