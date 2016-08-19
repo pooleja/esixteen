@@ -26,6 +26,76 @@ router.post('/', function(req, res, next) {
 
 });
 
+router.get('/demo', function(req, res) {
+
+  foundAd = {};
+
+  var title = req.query.title;
+  if(title){
+    title = title.substring(0, 126);
+    foundAd.title = title;
+  }
+
+  var description = req.query.description;
+  if(description){
+    description = description.substring(0, 1024);
+    foundAd.description = description;
+  }
+
+  var targetUrl = req.query.targetUrl;
+  if(targetUrl){
+    targetUrl = targetUrl.substring(0, 2024);
+    foundAd.targetUrl = targetUrl;
+  }
+
+  var imageUrl = req.query.imageUrl;
+  if(imageUrl){
+    imageUrl = imageUrl.substring(0, 2024);
+    foundAd.imageUrl = imageUrl;
+  }
+
+  res.render('apps/adcents/demo', { ad: foundAd, title: 'Services'});
+});
+
+router.get('/preview', function(req, res){
+
+  // Use a default ad but allow the user to override it
+  foundAd = {
+    title: "Find Aliens with Bitcoin",
+    description: "AlienSearchE16 is a bitcoin payable web app designed for the 21 Marketplace to allow clients to pay for the server to run SETI@home.",
+    targetUrl: "https://www.esixteen.co/apps/aliensearche16",
+    imageUrl: "https://www.esixteen.co/img/network.png"
+  };
+
+  console.log("Title: " + req.query.title);
+
+  var title = req.query.title;
+  if(title){
+    title = title.substring(0, 126);
+    foundAd.title = title;
+  }
+
+  var description = req.query.description;
+  if(description){
+    description = description.substring(0, 1024);
+    foundAd.description = description;
+  }
+
+  var targetUrl = req.query.targetUrl;
+  if(targetUrl){
+    targetUrl = targetUrl.substring(0, 2024);
+    foundAd.targetUrl = targetUrl;
+  }
+
+  var imageUrl = req.query.imageUrl;
+  if(imageUrl){
+    imageUrl = imageUrl.substring(0, 2024);
+    foundAd.imageUrl = imageUrl;
+  }
+
+  res.render('ad', { ad: foundAd});
+});
+
 router.get('/:adId', function(req, res) {
   key = req.params.adId;
 
@@ -57,6 +127,5 @@ router.get('/:adId', function(req, res) {
   });
 
 });
-
 
 module.exports = router;
