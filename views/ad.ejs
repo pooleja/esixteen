@@ -38,12 +38,12 @@
       <div class="outer">
         <div class="media inner">
           <div class="media-left" style="width: 100px">
-            <a href="<%= ad.targetUrl %>" target="_blank">
+            <a href="/ad/redirect/<%= ad.campaignKey %>" target="_blank">
               <img class="pull-left img-responsive" src="<%= ad.imageUrl %>">
             </a>
           </div>
           <div class="media-body">
-            <a href="<%= ad.targetUrl %>" target="_blank">
+            <a href="/ad/redirect/<%= ad.campaignKey %>" target="_blank">
               <h4 class="media-heading"><%= ad.title %></h4>
               <%= ad.description %>
             </a>

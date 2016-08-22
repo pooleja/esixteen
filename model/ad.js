@@ -8,6 +8,9 @@ var adSchema = mongoose.Schema({
   hostedUrl: String, // The website URL where this should be allow to be hosted
   siteKey: String,
   createdDate: { type: Date, default: Date.now },
+  impressionCount: {type: Number, default: 0},
+  clickthroughCount: {type: Number, default: 0},
+  campaignKey: String,
 });
 
 module.exports = mongoose.model('Ad', adSchema);

@@ -96,8 +96,61 @@ router.get('/preview', function(req, res){
   res.render('ad', { ad: foundAd});
 });
 
-router.get('/:adId', function(req, res) {
-  key = req.params.adId;
+// Get status about a campaign
+router.get('/stats/:campaignKey', function(req, res){
+
+  if(req.headers.client != Env.SECRET){
+    console.log("Failed client header check");
+    return res.json({success: false, error: "Failed client header check"});
+  }
+
+  campaignKey = req.params.campaignKey;
+
+  // Find the ad by ID and update the click count for it
+  Ad.findOne( {campaignKey : campaignKey}, function(error, foundAd){
+
+    // Check to see if the ad was found
+    if(error || !foundAd){
+
+      if(error){
+        console.log(error);
+        return res.json({success: false, error: error});
+      }
+
+      return res.json({success: false, error: "Campaign Key not found."});
+    }
+
+    return res.json({
+        success: true,
+        impressionCount: foundAd.impressionCount,
+        clickthroughCount: foundAd.clickthroughCount,
+      });
+  });
+});
+
+router.get('/redirect/:campaignKey', function(req, res){
+
+  key = req.params.campaignKey;
+
+  // Find the ad by ID and update the click count for it
+  Ad.findOneAndUpdate( {campaignKey : key}, {$inc: { clickthroughCount: 1 } }, {upsert: false, sort: {createdDate: -1}}, function(error, foundAd){
+
+    // Check to see if the ad was found
+    if(error || !foundAd){
+
+      if(error)
+        console.log(error);
+
+      // Redirect to home page?
+      res.redirect('/');
+    }
+
+    res.redirect(foundAd.targetUrl);
+  });
+});
+
+router.get('/:siteKey', function(req, res) {
+  key = req.params.siteKey;
 
   // Get midnight date - set to hour = 4 due to UTC time from EST
   var d = new Date();
@@ -105,7 +158,8 @@ router.get('/:adId', function(req, res) {
 
   console.log(d);
 
-  Ad.findOne({siteKey : key, createdDate: {"$lt" : d}}, null, {sort: {createdDate: -1}}, function(error, foundAd){
+  // Find the ad by ID and update the impression count for it
+  Ad.findOneAndUpdate( {siteKey : key, createdDate: {"$lt" : d}}, {$inc: { impressionCount: 1 } }, {upsert: false, sort: {createdDate: -1}}, function(error, foundAd){
 
     if(error || !foundAd){
 
@@ -118,7 +172,9 @@ router.get('/:adId', function(req, res) {
         title: "Find Aliens with Bitcoin",
         description: "AlienSearchE16 is a bitcoin payable web app designed for the 21 Marketplace to allow clients to pay for the server to run SETI@home.",
         targetUrl: "https://www.esixteen.co/apps/aliensearche16",
-        imageUrl: "https://www.esixteen.co/img/network.png"
+        imageUrl: "https://www.esixteen.co/img/network.png",
+        siteKey: key,
+        campaignKey: key, // Use a fake campaignKey
       };
     }
 

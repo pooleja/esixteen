@@ -24,10 +24,12 @@
           <p><a class="btn btn-primary btn-lg" href="https://github.com/pooleja/AdCentsE16" role="button">View on Github</a></p>
           <br />
 
-          <div class="" style="text-align: center;">
-            <h2>Live Ad</h2>
-            <iframe src="https://www.esixteen.co/ad/O0MX6OKH3RWASUVGEUMI" width="500" frameborder="1" ></iframe>
-          </div>
+          <% if (typeof AdCentsE16Token != 'undefined' && AdCentsE16Token ){ %>
+            <div class="" style="text-align: center;">
+              <h2>Live Ad</h2>
+              <iframe src="/ad/<%= AdCentsE16Token%>" width="500" frameborder="1" ></iframe>
+            </div>
+          <% } %>
 
           <br />
           <br />

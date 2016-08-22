@@ -4,3 +4,4 @@ exports.RECAPTCHA_PRIVATE_KEY = process.env.RECAPTCHA_PRIVATE_KEY; // Recaptcha 
 exports.RECAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY; // Recaptcha key
 exports.SECRET = process.env.SECRET; // Secret used for form submissions since it is not authenticated
 exports.NODE_ENV = process.env.NODE_ENV // 'production' or 'development'
+exports.AdCentsE16Token = process.env.AdCentsE16Token // Key from registering with AdCentsE16

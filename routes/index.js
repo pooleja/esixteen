@@ -17,13 +17,13 @@ var Env = require('../config/env.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  res.render('index', { title: ''});
+  res.render('index', { title: '', AdCentsE16Token: Env.AdCentsE16Token});
 
 });
 
 router.get('/apps/adcentse16', function(req, res, next) {
 
-  res.render('apps/adcentse16', { title: 'Services'});
+  res.render('apps/adcentse16', { title: 'Services', AdCentsE16Token: Env.AdCentsE16Token});
 
 });
 

@@ -14,7 +14,11 @@ if(title != ''){
   <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
   <meta name="google-site-verification" content="D57yFHp2825ChooBzm6sTQX4w0Ox4OXGY4clVY7I07M" />
-  <meta name="AdCentsE16-site-verification" content="O0MX6OKH3RWASUVGEUMI" />
+
+  <% if (typeof AdCentsE16Token != 'undefined' && AdCentsE16Token ){ %>
+    <meta name="AdCentsE16-site-verification" content="<%= AdCentsE16Token%>" />
+  <% } %>
+
 
 
   <meta name="keywords" content="E16, esixteen.co, esixteen, bitcoin micropayments, payment, micropayment, bitcoin, 21, 21.co, grid, grid computing, payment channel, network, platform">
