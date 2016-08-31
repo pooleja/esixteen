@@ -39,6 +39,12 @@ router.get('/apps/dnse16', function(req, res, next) {
 
 });
 
+router.get('/apps/elastice16', function(req, res, next) {
+
+  res.render('apps/elastice16', { title: 'Services'});
+
+});
+
 router.get('/apps/sensore16', function(req, res, next) {
 
   res.render('apps/sensore16', { title: 'Services'});
