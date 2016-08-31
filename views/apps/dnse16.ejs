@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head %>
+  <body>
+    <div>
+
+      <% include ../partials/nav %>
+
+      <div class="container">
+        <div class="jumbotron">
+          <h2>DnsE16</h2>
+
+          <p>
+            The DnsE16 service allows anyone running on the 21 network to use host names instead of IP addresses to keep track of servers.
+          </p>
+
+          <div align="center">
+            <img src="/img/dns.jpg" alt="DNS Image" style=""/>
+          </div>
+
+          <p>
+            Right now, you would need to run commands like:
+          </p>
+          <pre>$ 21 buy http://10.248.12.34:2001/service/endpoint</pre>
+
+          <p>
+            Using the new service, you could set it up so the following can be done with a host name instead:
+          </p>
+          <pre>$ 21 buy http://my-endpoint.21/service/endpoint</pre>
+          <p>
+            In the above example, you can see that it is using the <var>my-endpoint.21</var> host name instead of an IP address.
+          </p>
+
+
+
+          <p>
+            See the Github project to find out more information and learn how to use it.
+          </p>
+          <p><a class="btn btn-primary btn-lg" href="https://github.com/pooleja/DnsE16" role="button">View on Github</a></p>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

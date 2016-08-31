@@ -27,6 +27,18 @@ router.get('/apps/adcentse16', function(req, res, next) {
 
 });
 
+router.get('/apps/aliensearche16', function(req, res, next) {
+
+  res.render('apps/aliensearche16', { title: 'Services'});
+
+});
+
+router.get('/apps/dnse16', function(req, res, next) {
+
+  res.render('apps/dnse16', { title: 'Services'});
+
+});
+
 router.get('/apps/sensore16', function(req, res, next) {
 
   res.render('apps/sensore16', { title: 'Services'});
@@ -39,21 +51,15 @@ router.get('/apps/statse16', function(req, res, next) {
 
 });
 
-router.get('/apps/transcodee16', function(req, res, next) {
-
-  res.render('apps/transcodee16', { title: 'Services'});
-
-});
-
-router.get('/apps/aliensearche16', function(req, res, next) {
-
-  res.render('apps/aliensearche16', { title: 'Services'});
-
-});
-
 router.get('/apps/speede16', function(req, res, next) {
 
   res.render('apps/speede16', { title: 'Services'});
+
+});
+
+router.get('/apps/transcodee16', function(req, res, next) {
+
+  res.render('apps/transcodee16', { title: 'Services'});
 
 });
 
