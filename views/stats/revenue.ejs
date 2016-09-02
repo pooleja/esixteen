@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head %>
+  <body>
+    <div>
+    <% include ../partials/nav %>
+    <br/>
+
+    <div class="container">
+
+      <h1>Node Revenue</h1>
+      <p>Many people are curious to understand what kind of revenue they can expect by running a 21 node.  Below are the stats from our account with the 21 network.  Prices are in Satoshis earned.</p>
+      <p>This may be skewed higher than an average node, since we run a 21 computer that mines and we also run many services from E16 in addition to ones from 21.co.</p>
+      <br />
+      <h2>Total 30 Day Revenue</h2>
+      <%= total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> Satoshis
+      <br />
+      <br />
+      <h2>Daily Revenue in Satoshis</h2>
+      <div style="padding-left: 5%; padding-right: 5%;">
+        <canvas id="revChart" ></canvas>
+      </div>
+      <br />
+      <br />
+      <h2>Number of Daily Transactions</h2>
+      <div style="padding-left: 5%; padding-right: 5%;">
+        <canvas id="transactionChart" ></canvas>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+
+      <script>
+        Chart.defaults.global.legend.display = false;
+
+        var labels = [];
+        for(i =0; i < <%= dailyRevenue.length %>; i++){
+          var day = i + 1;
+          labels.push("Day " + day);
+        }
+
+        var ctx = document.getElementById("revChart");
+        var myLineChart = Chart.Line(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: [<%= dailyRevenue %>],
+                    borderWidth: 1
+                  }]
+            },
+            options:
+            {
+                scales:
+                {
+                    xAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
+
+        var ctx = document.getElementById("transactionChart");
+        var myLineChart = Chart.Line(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                  {
+                    data: [<%= dailyTransactions %>],
+                    borderWidth: 1
+                  }]
+            },
+            options:
+            {
+                scales:
+                {
+                    xAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

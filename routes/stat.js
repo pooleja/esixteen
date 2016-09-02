@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Server = require('../model/server.js');
+var Revenue = require('../model/revenue.js');
 var ServerStat = require('../model/serverStat.js');
 var NodeCountStat = require('../model/nodeCountStat.js');
 
@@ -51,6 +52,53 @@ router.get('/count', function(req, res, next) {
 
  });
 });
+
+/* GET count page. */
+router.get('/revenue', function(req, res, next) {
+
+ Revenue.findOne({}, null, {sort: {createdDate: -1 }}, function(error, rev) {
+
+   if(error || !rev){
+     console.log(error);
+     return res.render('stats/revenue', { title: 'Stats', dailyRevenue: [], dailyTransactions: [], total: 0});
+   }
+
+   console.log(JSON.stringify(rev));
+
+   var revenues = [];
+   var transcations = [];
+   for (var i = rev.dailyStats.length -1; i >= 0; i--) {
+     revenues.push(rev.dailyStats[i].revenue);
+     transcations.push(rev.dailyStats[i].num_transactions);
+   }
+
+   res.render('stats/revenue', { title: 'Stats', dailyRevenue: revenues, dailyTransactions: transcations, total: rev.totalRevenue});
+
+ });
+});
+
+
+router.post('/revenue', function(req, res){
+
+  //console.log(JSON.stringify(req.headers) + "\n\n");
+  console.log(JSON.stringify(req.body));
+
+  if(req.headers.client != Env.SECRET){
+    console.log("Failed client header check");
+    return res.json({success: false, error: "Failed client header check"});
+  }
+
+  // Save the new server that we have discovered
+  Revenue(req.body).save(function(error){
+    if(error){
+      console.log(error);
+      return res.json({success: false, error: error});
+    }
+
+    return res.json ({success: true});
+  });
+});
+
 
 router.post('/', function(req, res){
 
