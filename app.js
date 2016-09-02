@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var Env = require('./config/env.js');
 
 var routes = require('./routes/index');
+var appRoutes = require('./routes/apps');
 var statRoutes = require('./routes/stat');
 var speedRoutes = require('./routes/speed');
 var adRoutes = require('./routes/ad');
@@ -46,6 +47,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/apps', appRoutes);
 app.use('/stat', statRoutes);
 app.use('/speed', speedRoutes);
 app.use('/ad', adRoutes);

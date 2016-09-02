@@ -9,7 +9,7 @@ var Env = require('../config/env.js');
 
 router.get('/', function(req, res, next) {
 
-  res.render('stat', { title: 'Stats'});
+  res.render('stats/stat', { title: 'Stats'});
 
 });
 
@@ -31,7 +31,7 @@ router.get('/map', function(req, res, next) {
      }
    }
 
-   res.render('map', { title: 'Stats', key: Env.MAP_API_KEY, navPoints: serverList });
+   res.render('stats/map', { title: 'Stats', key: Env.MAP_API_KEY, navPoints: serverList });
 
  });
 });
@@ -47,7 +47,7 @@ router.get('/count', function(req, res, next) {
      data.push(stats[i].count);
    }
 
-   res.render('counts', { title: 'Stats', data: data });
+   res.render('stats/counts', { title: 'Stats', data: data });
 
  });
 });

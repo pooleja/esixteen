@@ -21,55 +21,6 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get('/apps/adcentse16', function(req, res, next) {
-
-  res.render('apps/adcentse16', { title: 'Services', AdCentsE16Token: Env.AdCentsE16Token});
-
-});
-
-router.get('/apps/aliensearche16', function(req, res, next) {
-
-  res.render('apps/aliensearche16', { title: 'Services'});
-
-});
-
-router.get('/apps/dnse16', function(req, res, next) {
-
-  res.render('apps/dnse16', { title: 'Services'});
-
-});
-
-router.get('/apps/elastice16', function(req, res, next) {
-
-  res.render('apps/elastice16', { title: 'Services'});
-
-});
-
-router.get('/apps/sensore16', function(req, res, next) {
-
-  res.render('apps/sensore16', { title: 'Services'});
-
-});
-
-router.get('/apps/statse16', function(req, res, next) {
-
-  res.render('apps/statse16', { title: 'Services'});
-
-});
-
-router.get('/apps/speede16', function(req, res, next) {
-
-  res.render('apps/speede16', { title: 'Services'});
-
-});
-
-router.get('/apps/transcodee16', function(req, res, next) {
-
-  res.render('apps/transcodee16', { title: 'Services'});
-
-});
-
-
 router.get('/learn', function(req, res, next) {
 
   res.render('learn', { title: 'Learn'});
@@ -150,42 +101,6 @@ router.post('/register', function(req, res, next) {
 
 });
 
-
-/* GET map page. */
-router.get('/map', function(req, res, next) {
-
-  Server.find({}, function(err, servers) {
-
-   var serverList = [];
-
-   for (var i = 0; i < servers.length; i++) {
-     var loc = servers[i].loc;
-     var latlong = {};
-     latlong['lat'] = loc.split(',')[0];
-     latlong['long'] = loc.split(',')[1];
-     serverList.push(latlong);
-   }
-
-   res.render('map', { title: 'Locations', key: Env.MAP_API_KEY, navPoints: serverList });
-
- });
-});
-
-/* GET count page. */
-router.get('/count', function(req, res, next) {
-
- NodeCountStat.find({}, 'count', {sort: 'recordDate'}, function(err, stats) {
-
-   console.log(JSON.stringify(stats));
-   var data = [];
-   for (var i = 0; i < stats.length; i++) {
-     data.push(stats[i].count);
-   }
-
-   res.render('counts', { title: 'Counts', data: data });
-
- });
-});
 
 router.post('/upload', function(req, res){
 
