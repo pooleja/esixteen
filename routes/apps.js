@@ -27,6 +27,12 @@ router.get('/elastice16', function(req, res, next) {
 
 });
 
+router.get('/ping21aggregatore16', function(req, res, next) {
+
+  res.render('apps/ping21aggregatore16', { title: 'Services'});
+
+});
+
 router.get('/reve16', function(req, res, next) {
 
   res.render('apps/reve16', { title: 'Services'});
