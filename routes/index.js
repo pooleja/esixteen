@@ -6,11 +6,11 @@ var ServerStat = require('../model/serverStat.js');
 var NodeCountStat = require('../model/nodeCountStat.js');
 var Env = require('../config/env.js');
 var request = require('request');
-
+var validators = require('validators');
 var ReadWriteLock = require('rwlock');
 var lock = new ReadWriteLock();
 
-var ipRegex = require('ip-regex');
+
 
 var Env = require('../config/env.js');
 
@@ -36,20 +36,19 @@ router.get('/register', function(req, res, next) {
 });
 
 router.post('/register', function(req, res, next) {
+  
+  console.log(JSON.stringify(req.body))
 
   var ip = req.body.inputIp;
-
-  if(!ipRegex({exact: true}).test(ip)){
-      console.log("Invalid IP submitted: " + ip);
-      return showRegisterPage(res, "Invalid IP submitted: " + ip);
+  if(!validators.ipv6.isValidIPv6Address(ip)){
+      console.log("Invalid IPv6 Address submitted: " + ip);
+      return showRegisterPage(res, "Invalid IPv6 addresss submitted: " + ip);
   }
 
-  if(ip.indexOf("10.244.") != 0){
+  if(ip.indexOf("fcce:a977:") != 0){
     console.log("Invalid Zero Tier IP submitted: " + ip);
-    return showRegisterPage(res, "Zero Tier IP address must start with \'10.244.\' ");
+    return showRegisterPage(res, "Zero Tier IP address must start with \'fcce:a977:\' ");
   }
-
-  console.log(JSON.stringify(req.body))
 
   request.post({url:'https://www.google.com/recaptcha/api/siteverify',
                   form: {

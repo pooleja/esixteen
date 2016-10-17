@@ -12,11 +12,11 @@
     "dotenv": "^2.0.0",
     "ejs": "~2.4.1",
     "express": "~4.13.4",
-    "ip-regex": "^1.0.3",
     "mongoose": "^4.5.2",
     "morgan": "~1.7.0",
     "request": "^2.74.0",
     "rwlock": "^5.0.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "validators": "^0.3.1"
   }
 }
